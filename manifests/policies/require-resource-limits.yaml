@@ -1,0 +1,43 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-resource-limits
+  annotations:
+    policies.kyverno.io/title: Require Resource Requests and Limits
+    policies.kyverno.io/category: Resource Management
+    policies.kyverno.io/severity: medium
+    policies.kyverno.io/subject: Pod
+    policies.kyverno.io/description: >-
+      Every container must declare CPU/memory requests and limits.
+      Missing limits allow a single workload to starve a node and are
+      the most common, lowest-blast-radius violation class, the
+      canonical case for automated remediation rather than manual
+      triage. This policy runs in Audit mode: it flags violations for
+      Warden to remediate via PR, it does not block admission. Set to
+      Enforce only after remediation and rollback paths are proven.
+    warden.io/remediation-tier: "auto"
+    warden.io/confidence-baseline: "0.95"
+spec:
+  validationFailureAction: Audit
+  background: true
+  rules:
+    - name: validate-resources
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      validate:
+        message: >-
+          CPU and memory requests/limits are required on every container.
+          This will be auto-flagged for remediation by Warden.
+        foreach:
+          - list: "request.object.spec.containers"
+            pattern:
+              resources:
+                requests:
+                  cpu: "?*"
+                  memory: "?*"
+                limits:
+                  cpu: "?*"
+                  memory: "?*"

@@ -1,0 +1,57 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: restrict-prod-network-policy-bypass
+  annotations:
+    policies.kyverno.io/title: Restrict Prod Namespace NetworkPolicy Bypass
+    policies.kyverno.io/category: Network Security
+    policies.kyverno.io/severity: high
+    policies.kyverno.io/subject: Pod
+    policies.kyverno.io/description: >-
+      Pods scheduled into namespaces labeled env=prod must land in a
+      namespace that already has at least one NetworkPolicy object
+      present, preventing default-allow east-west traffic in a
+      zero-trust cluster. This is a high-blast-radius violation class:
+      an automated fix here could itself cause an outage by cutting
+      off legitimate traffic paths that were never modeled. Warden
+      must never auto-merge remediation for anything matched by this
+      policy. It opens a PR and holds for human approval,
+      unconditionally, regardless of confidence score.
+    warden.io/remediation-tier: "manual-gate"
+    warden.io/confidence-baseline: "n/a"
+    warden.io/rationale: >-
+      Network policy changes in prod carry outage risk that outweighs
+      triage-backlog cost. This annotation is read by the Warden
+      controller's tier classifier (controller/internal/remediation/tier.go)
+      and is what prevents auto-merge for this rule regardless of any
+      confidence score the classifier computes.
+spec:
+  validationFailureAction: Audit
+  background: true
+  rules:
+    - name: require-networkpolicy-present-in-prod-namespace
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+              selector:
+                matchLabels:
+                  env: prod
+      context:
+        - name: networkPolicyList
+          apiCall:
+            urlPath: "/apis/networking.k8s.io/v1/namespaces/{{request.object.metadata.namespace}}/networkpolicies"
+            method: GET
+      validate:
+        message: >-
+          Namespace "{{request.object.metadata.namespace}}" is labeled
+          env=prod but has zero NetworkPolicy objects present, pod
+          admitted under default-allow. Flagged for Warden, routed to
+          manual-gate tier, no auto-merge.
+        deny:
+          conditions:
+            all:
+              - key: "{{ length(networkPolicyList.items) }}"
+                operator: Equals
+                value: 0
