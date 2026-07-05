@@ -35,7 +35,7 @@ spec:
           - resources:
               kinds:
                 - Pod
-              selector:
+              namespaceSelector:
                 matchLabels:
                   env: prod
       context:
