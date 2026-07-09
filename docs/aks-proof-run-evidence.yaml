@@ -1,0 +1,1481 @@
+apiVersion: v1
+items:
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:51Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 9e50bebb-a388-459b-8713-a8d072f64581
+    namespace: default
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: legacy-worker
+      uid: 9e50bebb-a388-459b-8713-a8d072f64581
+    resourceVersion: "514085"
+    uid: bee4c07e-b222-4dee-af48-d15647008e02
+  results:
+  - category: Resource Management
+    message: 'validation failure: validation error: CPU and memory requests/limits
+      are required on every container. This will be auto-flagged for remediation by
+      Warden. rule validate-resources failed at path /resources/limits/'
+    policy: require-resource-limits
+    result: fail
+    rule: validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504731
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: legacy-worker
+    namespace: default
+    uid: 9e50bebb-a388-459b-8713-a8d072f64581
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:16Z"
+    generation: 7
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 00cb4cdc-9e4a-43a6-aff6-7472bdd36541
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: coredns
+      uid: 00cb4cdc-9e4a-43a6-aff6-7472bdd36541
+    resourceVersion: "514908"
+    uid: 2f417387-87fd-4862-8069-b96dc6f32cfc
+  results:
+  - category: Resource Management
+    message: rule passed
+    policy: require-resource-limits
+    result: pass
+    rule: autogen-validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504737
+  scope:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: coredns
+    namespace: kube-system
+    uid: 00cb4cdc-9e4a-43a6-aff6-7472bdd36541
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:45Z"
+    generation: 3
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 03f781cc-623d-4309-ad42-09663befadbd
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: DaemonSet
+      name: cloud-node-manager
+      uid: 03f781cc-623d-4309-ad42-09663befadbd
+    resourceVersion: "514607"
+    uid: a2cab099-ff06-41ac-8f6e-0dbf5e693d03
+  results:
+  - category: Resource Management
+    message: 'validation failure: validation error: CPU and memory requests/limits
+      are required on every container. This will be auto-flagged for remediation by
+      Warden. rule autogen-validate-resources failed at path /resources/limits/cpu/'
+    policy: require-resource-limits
+    result: fail
+    rule: autogen-validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504736
+  scope:
+    apiVersion: apps/v1
+    kind: DaemonSet
+    name: cloud-node-manager
+    namespace: kube-system
+    uid: 03f781cc-623d-4309-ad42-09663befadbd
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:56Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 1e564805-9d95-4080-980d-cf4c20bd668e
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: konnectivity-agent
+      uid: 1e564805-9d95-4080-980d-cf4c20bd668e
+    resourceVersion: "514687"
+    uid: 2f0f06c7-3044-4615-973d-d3e762345b51
+  results:
+  - category: Resource Management
+    message: rule passed
+    policy: require-resource-limits
+    result: pass
+    rule: autogen-validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504735
+  scope:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: konnectivity-agent
+    namespace: kube-system
+    uid: 1e564805-9d95-4080-980d-cf4c20bd668e
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:16Z"
+    generation: 8
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 2a381adc-c5a5-4953-a3d9-e24a6a6b84ea
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: konnectivity-agent-668cd7b87d-vpdkn
+      uid: 2a381adc-c5a5-4953-a3d9-e24a6a6b84ea
+    resourceVersion: "514914"
+    uid: e693e185-aebf-478a-aae6-468653ff8265
+  results:
+  - category: Resource Management
+    message: rule passed
+    policy: require-resource-limits
+    result: pass
+    rule: validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504738
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: konnectivity-agent-668cd7b87d-vpdkn
+    namespace: kube-system
+    uid: 2a381adc-c5a5-4953-a3d9-e24a6a6b84ea
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:57Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 2f25494d-a2e5-4d29-8f65-dc978f54ef70
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: coredns-autoscaler-6b6676685f
+      uid: 2f25494d-a2e5-4d29-8f65-dc978f54ef70
+    resourceVersion: "514854"
+    uid: 52058a95-759f-4f31-8c53-426634481ce1
+  results:
+  - category: Resource Management
+    message: rule passed
+    policy: require-resource-limits
+    result: pass
+    rule: autogen-validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504736
+  scope:
+    apiVersion: apps/v1
+    kind: ReplicaSet
+    name: coredns-autoscaler-6b6676685f
+    namespace: kube-system
+    uid: 2f25494d-a2e5-4d29-8f65-dc978f54ef70
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:57:56Z"
+    generation: 11
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 432e389e-e6af-4903-bb13-bef4492dc362
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: metrics-server-85bd4cbc84-rsxkn
+      uid: 432e389e-e6af-4903-bb13-bef4492dc362
+    resourceVersion: "514897"
+    uid: 1ef51cc2-079c-429f-950d-51112b5673fd
+  results:
+  - category: Resource Management
+    message: rule passed
+    policy: require-resource-limits
+    result: pass
+    rule: validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504737
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: metrics-server-85bd4cbc84-rsxkn
+    namespace: kube-system
+    uid: 432e389e-e6af-4903-bb13-bef4492dc362
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:57Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 4684b8f7-d295-4e2e-a283-a7a11521d94e
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: metrics-server-7c4fbcc84
+      uid: 4684b8f7-d295-4e2e-a283-a7a11521d94e
+    resourceVersion: "514802"
+    uid: 036d8c19-11ec-484f-86b5-ef9fbdde87bb
+  results:
+  - category: Resource Management
+    message: 'validation failure: validation error: CPU and memory requests/limits
+      are required on every container. This will be auto-flagged for remediation by
+      Warden. rule autogen-validate-resources failed at path /resources/limits/'
+    policy: require-resource-limits
+    result: fail
+    rule: autogen-validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504737
+  scope:
+    apiVersion: apps/v1
+    kind: ReplicaSet
+    name: metrics-server-7c4fbcc84
+    namespace: kube-system
+    uid: 4684b8f7-d295-4e2e-a283-a7a11521d94e
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:57:56Z"
+    generation: 8
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 4c9fbf14-60da-448d-9fa4-51a625f1ce7b
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: coredns-55f58ccb97-488gv
+      uid: 4c9fbf14-60da-448d-9fa4-51a625f1ce7b
+    resourceVersion: "514947"
+    uid: 0ec40df6-83b2-49f6-8d5b-2d009a879d78
+  results:
+  - category: Resource Management
+    message: rule passed
+    policy: require-resource-limits
+    result: pass
+    rule: validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504738
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: coredns-55f58ccb97-488gv
+    namespace: kube-system
+    uid: 4c9fbf14-60da-448d-9fa4-51a625f1ce7b
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:56Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 4d4288ed-4f86-4539-b86c-b271d1835469
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: DaemonSet
+      name: csi-azurefile-node
+      uid: 4d4288ed-4f86-4539-b86c-b271d1835469
+    resourceVersion: "514653"
+    uid: 168ba101-b164-4b08-90be-6a7c1f81f0a3
+  results:
+  - category: Resource Management
+    message: 'validation failure: validation error: CPU and memory requests/limits
+      are required on every container. This will be auto-flagged for remediation by
+      Warden. rule autogen-validate-resources failed at path /resources/limits/cpu/'
+    policy: require-resource-limits
+    result: fail
+    rule: autogen-validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504736
+  scope:
+    apiVersion: apps/v1
+    kind: DaemonSet
+    name: csi-azurefile-node
+    namespace: kube-system
+    uid: 4d4288ed-4f86-4539-b86c-b271d1835469
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:57:55Z"
+    generation: 9
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 60f3ddc4-7cb0-40d2-bc67-6d49af656c33
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: konnectivity-agent-autoscaler
+      uid: 60f3ddc4-7cb0-40d2-bc67-6d49af656c33
+    resourceVersion: "514863"
+    uid: 01deab53-ae2d-4b0d-b74e-c5bac289a1d5
+  results:
+  - category: Resource Management
+    message: rule passed
+    policy: require-resource-limits
+    result: pass
+    rule: autogen-validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504737
+  scope:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: konnectivity-agent-autoscaler
+    namespace: kube-system
+    uid: 60f3ddc4-7cb0-40d2-bc67-6d49af656c33
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:57Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 6e184e15-c2d1-47de-9f32-e4b11bea5702
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: konnectivity-agent-cdfdf479
+      uid: 6e184e15-c2d1-47de-9f32-e4b11bea5702
+    resourceVersion: "514834"
+    uid: c0f3c737-95a7-405c-82d8-c5e4bbe72370
+  results:
+  - category: Resource Management
+    message: rule passed
+    policy: require-resource-limits
+    result: pass
+    rule: autogen-validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504737
+  scope:
+    apiVersion: apps/v1
+    kind: ReplicaSet
+    name: konnectivity-agent-cdfdf479
+    namespace: kube-system
+    uid: 6e184e15-c2d1-47de-9f32-e4b11bea5702
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:36Z"
+    generation: 4
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 739ebf2b-4530-4e47-981b-297e08cc029d
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: coredns-55f58ccb97-h9tx9
+      uid: 739ebf2b-4530-4e47-981b-297e08cc029d
+    resourceVersion: "514944"
+    uid: 01d33728-b82f-4410-88e2-73ec50ecbe92
+  results:
+  - category: Resource Management
+    message: rule passed
+    policy: require-resource-limits
+    result: pass
+    rule: validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504738
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: coredns-55f58ccb97-h9tx9
+    namespace: kube-system
+    uid: 739ebf2b-4530-4e47-981b-297e08cc029d
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:36Z"
+    generation: 3
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 7a52055f-11ad-47b5-a838-f82a650839ef
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: cloud-node-manager-4s7dd
+      uid: 7a52055f-11ad-47b5-a838-f82a650839ef
+    resourceVersion: "514737"
+    uid: a845e23e-1475-4765-88a4-597dda2e35e2
+  results:
+  - category: Resource Management
+    message: 'validation failure: validation error: CPU and memory requests/limits
+      are required on every container. This will be auto-flagged for remediation by
+      Warden. rule validate-resources failed at path /resources/limits/cpu/'
+    policy: require-resource-limits
+    result: fail
+    rule: validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504735
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: cloud-node-manager-4s7dd
+    namespace: kube-system
+    uid: 7a52055f-11ad-47b5-a838-f82a650839ef
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:37Z"
+    generation: 4
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 82c299c2-3f0d-458d-ac8f-84707eded042
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: csi-azuredisk-node-ds5bs
+      uid: 82c299c2-3f0d-458d-ac8f-84707eded042
+    resourceVersion: "514898"
+    uid: 2ea9e9cb-4baf-4884-9968-26105ad1b361
+  results:
+  - category: Resource Management
+    message: 'validation failure: validation error: CPU and memory requests/limits
+      are required on every container. This will be auto-flagged for remediation by
+      Warden. rule validate-resources failed at path /resources/limits/cpu/'
+    policy: require-resource-limits
+    result: fail
+    rule: validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504738
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: csi-azuredisk-node-ds5bs
+    namespace: kube-system
+    uid: 82c299c2-3f0d-458d-ac8f-84707eded042
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:56Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 8ad3220b-246a-496e-9d68-272fb43ebe24
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: DaemonSet
+      name: azure-cns
+      uid: 8ad3220b-246a-496e-9d68-272fb43ebe24
+    resourceVersion: "514661"
+    uid: 48891a06-b604-4ddc-898f-f1e05bff38d4
+  results:
+  - category: Resource Management
+    message: rule passed
+    policy: require-resource-limits
+    result: pass
+    rule: autogen-validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504736
+  scope:
+    apiVersion: apps/v1
+    kind: DaemonSet
+    name: azure-cns
+    namespace: kube-system
+    uid: 8ad3220b-246a-496e-9d68-272fb43ebe24
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:56Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 8e8ba5e6-99ac-4e6d-b418-65f5f140a39d
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: DaemonSet
+      name: azure-ip-masq-agent
+      uid: 8e8ba5e6-99ac-4e6d-b418-65f5f140a39d
+    resourceVersion: "514604"
+    uid: e9f28c59-137c-4edf-9e14-eb7008a68790
+  results:
+  - category: Resource Management
+    message: rule passed
+    policy: require-resource-limits
+    result: pass
+    rule: autogen-validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504735
+  scope:
+    apiVersion: apps/v1
+    kind: DaemonSet
+    name: azure-ip-masq-agent
+    namespace: kube-system
+    uid: 8e8ba5e6-99ac-4e6d-b418-65f5f140a39d
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:47Z"
+    generation: 3
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 90d43b8c-925a-4acc-b328-34cc8a6bfc0f
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: coredns-autoscaler-6b6676685f-k5vsp
+      uid: 90d43b8c-925a-4acc-b328-34cc8a6bfc0f
+    resourceVersion: "514956"
+    uid: f9e4fa6e-a6ed-44d7-9afe-d821fe36a7c8
+  results:
+  - category: Resource Management
+    message: rule passed
+    policy: require-resource-limits
+    result: pass
+    rule: validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504738
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: coredns-autoscaler-6b6676685f-k5vsp
+    namespace: kube-system
+    uid: 90d43b8c-925a-4acc-b328-34cc8a6bfc0f
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:46Z"
+    generation: 2
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 9b4ab5e7-0d85-4e49-98f8-d4b38faa1172
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: metrics-server
+      uid: 9b4ab5e7-0d85-4e49-98f8-d4b38faa1172
+    resourceVersion: "514654"
+    uid: 2702b433-0757-4889-b22c-b251ec6bf221
+  results:
+  - category: Resource Management
+    message: rule passed
+    policy: require-resource-limits
+    result: pass
+    rule: autogen-validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504735
+  scope:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: metrics-server
+    namespace: kube-system
+    uid: 9b4ab5e7-0d85-4e49-98f8-d4b38faa1172
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:57Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: a25f37be-45d5-4c0c-bf45-6c282ecc0c55
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: metrics-server-85bd4cbc84-5bz9v
+      uid: a25f37be-45d5-4c0c-bf45-6c282ecc0c55
+    resourceVersion: "514736"
+    uid: 08529f18-5093-4a37-a786-3362145ac610
+  results:
+  - category: Resource Management
+    message: rule passed
+    policy: require-resource-limits
+    result: pass
+    rule: validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504735
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: metrics-server-85bd4cbc84-5bz9v
+    namespace: kube-system
+    uid: a25f37be-45d5-4c0c-bf45-6c282ecc0c55
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:57Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: df88aa4b-c87b-47f6-8b1e-c4171307bec7
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: azure-cns-6dfsx
+      uid: df88aa4b-c87b-47f6-8b1e-c4171307bec7
+    resourceVersion: "514789"
+    uid: 5bb95635-65d6-474c-8c3c-f1fbc076c43f
+  results:
+  - category: Resource Management
+    message: rule passed
+    policy: require-resource-limits
+    result: pass
+    rule: validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504736
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: azure-cns-6dfsx
+    namespace: kube-system
+    uid: df88aa4b-c87b-47f6-8b1e-c4171307bec7
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:57Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: e0bcbfb2-694e-4d54-8992-533081eee372
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: konnectivity-agent-668cd7b87d-wpsr7
+      uid: e0bcbfb2-694e-4d54-8992-533081eee372
+    resourceVersion: "514788"
+    uid: 9bdddb8a-3a35-40f4-93d3-8293a359a578
+  results:
+  - category: Resource Management
+    message: rule passed
+    policy: require-resource-limits
+    result: pass
+    rule: validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504737
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: konnectivity-agent-668cd7b87d-wpsr7
+    namespace: kube-system
+    uid: e0bcbfb2-694e-4d54-8992-533081eee372
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:57:56Z"
+    generation: 10
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: e303ab93-0dbb-42f6-b04c-afb045ce42c0
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: konnectivity-agent-autoscaler-d8f888d85-6g8qv
+      uid: e303ab93-0dbb-42f6-b04c-afb045ce42c0
+    resourceVersion: "514918"
+    uid: 6600f769-e022-40ef-9b8a-080ac94466e3
+  results:
+  - category: Resource Management
+    message: rule passed
+    policy: require-resource-limits
+    result: pass
+    rule: validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504738
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: konnectivity-agent-autoscaler-d8f888d85-6g8qv
+    namespace: kube-system
+    uid: e303ab93-0dbb-42f6-b04c-afb045ce42c0
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:57:56Z"
+    generation: 11
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: e6797211-c4c0-49db-8003-b89dc687e327
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: azure-ip-masq-agent-fbvj2
+      uid: e6797211-c4c0-49db-8003-b89dc687e327
+    resourceVersion: "514906"
+    uid: 81c76a35-4082-45e7-89c6-851a52068e02
+  results:
+  - category: Resource Management
+    message: rule passed
+    policy: require-resource-limits
+    result: pass
+    rule: validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504737
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: azure-ip-masq-agent-fbvj2
+    namespace: kube-system
+    uid: e6797211-c4c0-49db-8003-b89dc687e327
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:56Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: ea2a24c9-a1eb-4be8-b383-cd935532fea2
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: DaemonSet
+      name: kube-proxy
+      uid: ea2a24c9-a1eb-4be8-b383-cd935532fea2
+    resourceVersion: "514573"
+    uid: eb8ba423-ea02-4deb-932f-f1a34b0ea613
+  results:
+  - category: Resource Management
+    message: 'validation failure: validation error: CPU and memory requests/limits
+      are required on every container. This will be auto-flagged for remediation by
+      Warden. rule autogen-validate-resources failed at path /resources/limits/'
+    policy: require-resource-limits
+    result: fail
+    rule: autogen-validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504735
+  scope:
+    apiVersion: apps/v1
+    kind: DaemonSet
+    name: kube-proxy
+    namespace: kube-system
+    uid: ea2a24c9-a1eb-4be8-b383-cd935532fea2
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:16Z"
+    generation: 8
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: ec1f21cf-e19d-4072-8215-4b4e77c87017
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: DaemonSet
+      name: azure-cns-win
+      uid: ec1f21cf-e19d-4072-8215-4b4e77c87017
+    resourceVersion: "514889"
+    uid: a43b71a7-0d45-4054-b79e-8062a62edf8e
+  results:
+  - category: Resource Management
+    message: 'validation failure: validation error: CPU and memory requests/limits
+      are required on every container. This will be auto-flagged for remediation by
+      Warden. rule autogen-validate-resources failed at path /resources/requests/'
+    policy: require-resource-limits
+    result: fail
+    rule: autogen-validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504737
+  scope:
+    apiVersion: apps/v1
+    kind: DaemonSet
+    name: azure-cns-win
+    namespace: kube-system
+    uid: ec1f21cf-e19d-4072-8215-4b4e77c87017
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:56Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 25e5b14b-3269-4f4b-8623-5e15e8ae5d3a
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: batch/v1
+      kind: CronJob
+      name: kyverno-cleanup-cluster-admission-reports
+      uid: 25e5b14b-3269-4f4b-8623-5e15e8ae5d3a
+    resourceVersion: "514597"
+    uid: b8e6b51e-c17e-4714-b6d4-5855e84ec4e8
+  results:
+  - category: Resource Management
+    message: 'validation failure: validation error: CPU and memory requests/limits
+      are required on every container. This will be auto-flagged for remediation by
+      Warden. rule autogen-cronjob-validate-resources failed at path /resources/limits/'
+    policy: require-resource-limits
+    result: fail
+    rule: autogen-cronjob-validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504735
+  scope:
+    apiVersion: batch/v1
+    kind: CronJob
+    name: kyverno-cleanup-cluster-admission-reports
+    namespace: kyverno
+    uid: 25e5b14b-3269-4f4b-8623-5e15e8ae5d3a
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:56Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 513d3691-68c8-4150-9d67-31169ad394a7
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: kyverno-admission-controller
+      uid: 513d3691-68c8-4150-9d67-31169ad394a7
+    resourceVersion: "514678"
+    uid: 7226511a-3f7f-494f-a3b6-0d1dcecbb385
+  results:
+  - category: Resource Management
+    message: 'validation failure: validation error: CPU and memory requests/limits
+      are required on every container. This will be auto-flagged for remediation by
+      Warden. rule autogen-validate-resources failed at path /resources/limits/cpu/'
+    policy: require-resource-limits
+    result: fail
+    rule: autogen-validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504735
+  scope:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: kyverno-admission-controller
+    namespace: kyverno
+    uid: 513d3691-68c8-4150-9d67-31169ad394a7
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:57:56Z"
+    generation: 9
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 7a0dc5a3-a1c0-4f0b-8ac8-19c04ef85f0c
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: kyverno-background-controller-78d7d78768-st8pz
+      uid: 7a0dc5a3-a1c0-4f0b-8ac8-19c04ef85f0c
+    resourceVersion: "514967"
+    uid: a086474b-b431-4d25-ab4a-ad55c36e992c
+  results:
+  - category: Resource Management
+    message: 'validation failure: validation error: CPU and memory requests/limits
+      are required on every container. This will be auto-flagged for remediation by
+      Warden. rule validate-resources failed at path /resources/limits/cpu/'
+    policy: require-resource-limits
+    result: fail
+    rule: validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504737
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: kyverno-background-controller-78d7d78768-st8pz
+    namespace: kyverno
+    uid: 7a0dc5a3-a1c0-4f0b-8ac8-19c04ef85f0c
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:57:56Z"
+    generation: 9
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 805a395c-0ac0-40bb-93e4-0dd118a68b4b
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: kyverno-admission-controller-64c5fb696c-l2bt7
+      uid: 805a395c-0ac0-40bb-93e4-0dd118a68b4b
+    resourceVersion: "514903"
+    uid: 93d82b43-3a5f-4ad1-beed-cdf75fc8cebd
+  results:
+  - category: Resource Management
+    message: 'validation failure: validation error: CPU and memory requests/limits
+      are required on every container. This will be auto-flagged for remediation by
+      Warden. rule validate-resources failed at path /resources/limits/cpu/'
+    policy: require-resource-limits
+    result: fail
+    rule: validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504737
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: kyverno-admission-controller-64c5fb696c-l2bt7
+    namespace: kyverno
+    uid: 805a395c-0ac0-40bb-93e4-0dd118a68b4b
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:47Z"
+    generation: 3
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 9051d1e8-28c6-452c-8346-5ebee9a0226c
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: kyverno-reports-controller-76d88ff5f9-5w9df
+      uid: 9051d1e8-28c6-452c-8346-5ebee9a0226c
+    resourceVersion: "514790"
+    uid: 9438f4c4-9689-4b99-a59a-7b16de3783b5
+  results:
+  - category: Resource Management
+    message: 'validation failure: validation error: CPU and memory requests/limits
+      are required on every container. This will be auto-flagged for remediation by
+      Warden. rule validate-resources failed at path /resources/limits/cpu/'
+    policy: require-resource-limits
+    result: fail
+    rule: validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504737
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: kyverno-reports-controller-76d88ff5f9-5w9df
+    namespace: kyverno
+    uid: 9051d1e8-28c6-452c-8346-5ebee9a0226c
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:57Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 9860c011-145b-445d-acb8-f2d6e30b237e
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: kyverno-cleanup-controller-7d58dcd575-vnrtf
+      uid: 9860c011-145b-445d-acb8-f2d6e30b237e
+    resourceVersion: "514753"
+    uid: 10651f0e-8224-4d9e-8ba8-386e3a1b4e73
+  results:
+  - category: Resource Management
+    message: 'validation failure: validation error: CPU and memory requests/limits
+      are required on every container. This will be auto-flagged for remediation by
+      Warden. rule validate-resources failed at path /resources/limits/cpu/'
+    policy: require-resource-limits
+    result: fail
+    rule: validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504736
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: kyverno-cleanup-controller-7d58dcd575-vnrtf
+    namespace: kyverno
+    uid: 9860c011-145b-445d-acb8-f2d6e30b237e
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:56Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: d045b086-1b4a-46f1-bb79-cba0533e21d0
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: kyverno-background-controller
+      uid: d045b086-1b4a-46f1-bb79-cba0533e21d0
+    resourceVersion: "514643"
+    uid: ea923efd-81b7-400b-8043-d44dc2fdcffa
+  results:
+  - category: Resource Management
+    message: 'validation failure: validation error: CPU and memory requests/limits
+      are required on every container. This will be auto-flagged for remediation by
+      Warden. rule autogen-validate-resources failed at path /resources/limits/cpu/'
+    policy: require-resource-limits
+    result: fail
+    rule: autogen-validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504735
+  scope:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: kyverno-background-controller
+    namespace: kyverno
+    uid: d045b086-1b4a-46f1-bb79-cba0533e21d0
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:17Z"
+    generation: 7
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: d14ee874-31c8-4fb2-ba2b-fa067a1d0361
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: kyverno-reports-controller-76d88ff5f9
+      uid: d14ee874-31c8-4fb2-ba2b-fa067a1d0361
+    resourceVersion: "514957"
+    uid: ec799b48-dd22-4c2d-8cd4-97949c906e06
+  results:
+  - category: Resource Management
+    message: 'validation failure: validation error: CPU and memory requests/limits
+      are required on every container. This will be auto-flagged for remediation by
+      Warden. rule autogen-validate-resources failed at path /resources/limits/cpu/'
+    policy: require-resource-limits
+    result: fail
+    rule: autogen-validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504738
+  scope:
+    apiVersion: apps/v1
+    kind: ReplicaSet
+    name: kyverno-reports-controller-76d88ff5f9
+    namespace: kyverno
+    uid: d14ee874-31c8-4fb2-ba2b-fa067a1d0361
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:58:47Z"
+    generation: 3
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: e034eebe-f483-445f-83b3-7df6d49a095e
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: kyverno-background-controller-78d7d78768
+      uid: e034eebe-f483-445f-83b3-7df6d49a095e
+    resourceVersion: "514867"
+    uid: e24a9d58-29d7-4696-8f6c-95f8426239bf
+  results:
+  - category: Resource Management
+    message: 'validation failure: validation error: CPU and memory requests/limits
+      are required on every container. This will be auto-flagged for remediation by
+      Warden. rule autogen-validate-resources failed at path /resources/limits/cpu/'
+    policy: require-resource-limits
+    result: fail
+    rule: autogen-validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504737
+  scope:
+    apiVersion: apps/v1
+    kind: ReplicaSet
+    name: kyverno-background-controller-78d7d78768
+    namespace: kyverno
+    uid: e034eebe-f483-445f-83b3-7df6d49a095e
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-07-08T09:57:56Z"
+    generation: 9
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: ee262e1f-2020-4753-a875-c59c8456a583
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: kyverno-cleanup-controller-7d58dcd575
+      uid: ee262e1f-2020-4753-a875-c59c8456a583
+    resourceVersion: "514942"
+    uid: a7c7a5e0-3468-4afa-be2b-ffe8620e3d82
+  results:
+  - category: Resource Management
+    message: 'validation failure: validation error: CPU and memory requests/limits
+      are required on every container. This will be auto-flagged for remediation by
+      Warden. rule autogen-validate-resources failed at path /resources/limits/cpu/'
+    policy: require-resource-limits
+    result: fail
+    rule: autogen-validate-resources
+    scored: true
+    severity: medium
+    source: kyverno
+    timestamp:
+      nanos: 0
+      seconds: 1783504737
+  scope:
+    apiVersion: apps/v1
+    kind: ReplicaSet
+    name: kyverno-cleanup-controller-7d58dcd575
+    namespace: kyverno
+    uid: ee262e1f-2020-4753-a875-c59c8456a583
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+kind: List
+metadata:
+  resourceVersion: ""
