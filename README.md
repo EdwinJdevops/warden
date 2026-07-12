@@ -1,98 +1,116 @@
 # Warden
 
-Closed-loop Kubernetes policy remediation with a hard-gated autonomy boundary.
+**Closed-loop Kubernetes policy remediation with a hard-gated autonomy boundary.**
 
-## Status: Week 1, early build. Not production-ready. Read this section before anything else.
+[![Go](https://img.shields.io/badge/Go-1.22-00ADD8?logo=go)](go.mod)
+[![Kyverno](https://img.shields.io/badge/Kyverno-v1.12-blue)](https://kyverno.io)
+[![Tests](https://img.shields.io/badge/tests-14%2F14%20passing-brightgreen)](controller)
+[![License](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
 
-This repo is honest about what exists and what does not. Nothing here claims
-to be more finished than it is.
+Most policy tools stop at detection. Kyverno and OPA flag a violation. A scanner reports it. A human still has to read it, judge the risk, and merge the fix. That creates a backlog that grows faster than review capacity.
 
-**Built and verified:**
-- Two Kyverno ClusterPolicies (`manifests/policies/`), Audit mode.
-- Paired violation/compliant sample manifests for the resource-limits policy.
-- The remediation tier classifier (`controller/internal/remediation/tier.go`)
-  with a full unit test suite. This is the safety-critical piece: it decides
-  whether a violation can be auto-merged or must be held for human approval.
-  All 7 tests pass, `go vet` clean, `gofmt` clean.
+Warden classifies every violation into a confidence-gated autonomy tier, generates the fix, and opens a real, auditable pull request. Low-risk violations can auto-merge through the normal GitOps pipeline. High-risk violations open a PR and stop there, unconditionally, regardless of confidence score.
 
-**Not built yet:**
-- The Kubernetes controller itself (the reconciliation loop that watches for
-  Kyverno PolicyReports and calls the classifier). This needs `client-go` and
-  `controller-runtime`, which could not be fetched in the build environment
-  used to scaffold this repo. It compiles and gets tested on a machine with
-  normal internet access, not here.
-- GitOps PR generation logic.
-- The audit trail service.
-- The Terraform AKS module (used once for a cloud portability proof run,
-  then torn down).
+## Why not Kyverno's own mutate policies?
 
-## Why this exists
+Kyverno can already patch live cluster objects at admission time. That fixes the **cluster**, not the **git source**, and breaks the single-source-of-truth model every GitOps setup depends on. Warden fixes the git source and merges through the normal pull request pipeline. Git stays authoritative. The cluster only changes because a commit changed.
 
-Policy engines (Kyverno, OPA Gatekeeper) block or flag bad manifests. They
-do not fix them. Drift and scanning tools report violations and stop at a
-diff, a human still has to read it, judge the risk, and merge the fix. That
-creates a backlog that grows faster than review capacity.
+## Architecture
 
-Kyverno's own `mutate` policies can patch live objects at admission time,
-but that fixes the cluster, not the git source, which breaks GitOps's
-single-source-of-truth model. Warden's actual position: fix the git source,
-merge through the normal pipeline, keep git authoritative.
+```mermaid
+flowchart TD
+    A[Kyverno ClusterPolicy] -->|Audit mode scan| B[PolicyReport]
+    B --> C[Warden Controller]
+    C -->|reads warden.io/* annotations| D[Tier Classifier]
+    D -->|tier: auto, confidence >= baseline| E[Generate Patch]
+    D -->|tier: manual-gate, always| F[Open PR, hold for human]
+    E --> G[Open PR via GitHub API]
+    G -->|AutoMergeAllowed = true| H[Auto-merge]
+    G -->|AutoMergeAllowed = false| F
+    H --> I[ArgoCD syncs merged commit to cluster]
+    F -->|human approves| I
 
-## The core design decision
+    style D fill:#2d2d2d,color:#fff
+    style F fill:#5c1a1a,color:#fff
+    style H fill:#1a4d2e,color:#fff
+```
 
-Not every violation deserves the same trust level. Warden classifies each
-policy into one of two tiers, declared directly on the ClusterPolicy as an
-annotation, not hidden in application code:
+The tier classifier (`controller/internal/remediation/tier.go`) is the safety-critical piece. `TestManualGateNeverAutoMerges` sweeps confidence from 0.0 to 1.0 and asserts a manual-gate policy can never return `AutoMergeAllowed = true`, at any score. That boundary is enforced in code, not in a comment.
 
-- `warden.io/remediation-tier: "auto"`. Low blast radius (missing resource
-  limits, wrong labels). Eligible for auto-merge if the computed confidence
-  score clears the policy's declared baseline.
-- `warden.io/remediation-tier: "manual-gate"`. High blast radius (prod
-  network policy, RBAC). PR opens, auto-merge is forbidden unconditionally,
-  regardless of confidence score. See `TestManualGateNeverAutoMerges` in
-  `controller/internal/remediation/tier_test.go`, this is the test that
-  guarantees that boundary can't be silently broken by a future refactor.
+## Status
+
+| Component | State |
+|---|---|
+| Kyverno ClusterPolicies (`require-resource-limits`, `restrict-prod-network-policy-bypass`) | Verified end-to-end on kind and on Azure AKS |
+| Tier classifier | 7/7 tests passing, `go vet` and `gofmt` clean |
+| PolicyReport watcher | Compiles, no unit tests yet (real gap, tracked, not hidden) |
+| Resource-limits patch generator | 7/7 tests passing against real manifests |
+| GitHub PR automation + auto-merge gate | Compiles, wired into the controller, dry-run by default |
+| Full end-to-end run against a live cluster with a real GitHub token | Not yet executed, next verification step |
+
+Nothing in this table is aspirational. If a row says "not yet," it means exactly that.
+
+## Quickstart
+
+```bash
+# 1. Local cluster
+kind create cluster --name warden-dev
+
+# 2. Install Kyverno (server-side apply avoids a known CRD annotation-size limit)
+kubectl apply --server-side -f https://github.com/kyverno/kyverno/releases/download/v1.12.0/install.yaml
+kubectl wait --for=condition=Ready pods --all -n kyverno --timeout=180s
+
+# 3. Apply the policies and a sample violation
+kubectl apply -f manifests/policies/
+kubectl apply -f manifests/violations/no-resource-limits.yaml
+
+# 4. Confirm the violation is flagged
+kubectl get policyreport -A -o yaml
+
+# 5. Run the controller in dry-run mode (default, opens zero PRs, logs only)
+cd controller/cmd/warden
+go run .
+```
+
+To run live (opens real PRs, auto-merges when the classifier allows it):
+
+```bash
+export WARDEN_GITHUB_TOKEN=ghp_xxx
+go run . -dry-run=false -repo-owner=EdwinJdevops -repo-name=warden
+```
 
 ## Repo layout
 
 ```
 warden/
 ├── manifests/
-│   ├── policies/      Kyverno ClusterPolicies
-│   ├── violations/     sample non-compliant workloads
-│   └── compliant/      the target state Warden's remediation converges toward
+│   ├── policies/       Kyverno ClusterPolicies
+│   ├── violations/      sample non-compliant workloads
+│   └── compliant/       target state after remediation
 ├── controller/
-│   ├── cmd/warden/     entrypoint (not yet implemented)
+│   ├── cmd/warden/      entrypoint, CLI flags, main loop
 │   └── internal/
-│       └── remediation/  tier classifier, fully tested
-├── terraform/           AKS proof-run module (not yet implemented)
+│       ├── watcher/      PolicyReport + ClusterPolicy fetching
+│       ├── remediation/  tier classifier (safety boundary)
+│       └── gitops/       patch generation + PR automation
+├── terraform/            one-time AKS cloud-portability proof, destroyed after each run
 └── docs/
     └── ARCHITECTURE.md
 ```
 
-## Running what exists today
+## Design decisions worth reading
 
-```bash
-# Tier classifier tests, stdlib only, no cluster needed
-cd controller/internal/remediation
-go test -v ./...
-```
-
-## Running the Kyverno policies (needs kind + Kyverno installed)
-
-```bash
-kind create cluster --name warden-dev
-kubectl apply -f https://github.com/kyverno/kyverno/releases/download/v1.12.0/install.yaml
-kubectl wait --for=condition=Ready pods --all -n kyverno --timeout=120s
-
-kubectl apply -f manifests/policies/require-resource-limits.yaml
-kubectl apply -f manifests/violations/no-resource-limits.yaml
-kubectl get policyreport -o yaml   # should show a FAIL against legacy-worker
-```
-
-That last step has not been run against a real cluster yet from this
-machine. It is the first thing to verify on yours.
+- **Deterministic confidence scoring, not an LLM call.** The resource-limits fix has exactly one correct shape. A model call here would be theater. See `docs/ARCHITECTURE.md`.
+- **Ephemeral cloud infrastructure.** The AKS proof-run is provisioned, verified, and destroyed the same session. Idle cloud spend with no offsetting purpose is a FinOps failure, not a demonstration of cloud skill.
+- **Two struct types for policy annotations** (`watcher.PolicyAnnotationsRaw` and `remediation.PolicyAnnotations`), converted explicitly at the package boundary. Avoids a cross-package dependency for a shared shape.
 
 ## License
 
-MIT, see LICENSE.
+MIT, see [LICENSE](LICENSE).
+
+## Author
+
+Built by **Edwin Jonathan** ([@EdwinJdevops](https://github.com/EdwinJdevops)), Cloud/DevOps engineer.
+
+LinkedIn: _add link_
+Upwork: _add link_
