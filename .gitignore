@@ -1,1 +1,6 @@
 go1.22.12.linux-amd64.tar.gz
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfplan
+bin/

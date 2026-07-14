@@ -116,6 +116,29 @@ func (c *Client) OpenRemediationPR(ctx context.Context, req PRRequest, branchNam
 	return pr, nil
 }
 
+// GetFileContent fetches the current content and SHA of a file from the
+// given branch. The SHA is required by OpenRemediationPR's UpdateFile
+// call, GitHub's content API is optimistic-locking based, an update
+// without the current SHA is rejected.
+func (c *Client) GetFileContent(ctx context.Context, owner, repo, path, ref string) (content string, sha string, err error) {
+	fileContent, _, _, err := c.gh.Repositories.GetContents(ctx, owner, repo, path, &github.RepositoryContentGetOptions{
+		Ref: ref,
+	})
+	if err != nil {
+		return "", "", fmt.Errorf("gitops: failed to fetch %q from %s/%s@%s: %w", path, owner, repo, ref, err)
+	}
+	if fileContent == nil {
+		return "", "", fmt.Errorf("gitops: %q resolved to a directory, not a file", path)
+	}
+
+	decoded, err := fileContent.GetContent()
+	if err != nil {
+		return "", "", fmt.Errorf("gitops: failed to decode content of %q: %w", path, err)
+	}
+
+	return decoded, fileContent.GetSHA(), nil
+}
+
 // MergeIfAllowed merges the given PR, but only if allowed is true. This
 // is the single chokepoint for all auto-merge activity in the codebase.
 // Callers must pass decision.AutoMergeAllowed directly, computed by
