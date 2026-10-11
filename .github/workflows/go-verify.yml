@@ -1,0 +1,55 @@
+name: Go verification
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - '**/*.go'
+      - go.mod
+      - go.sum
+      - Makefile
+      - .github/workflows/go-verify.yml
+  push:
+    branches: [master]
+    paths:
+      - '**/*.go'
+      - go.mod
+      - go.sum
+      - Makefile
+      - .github/workflows/go-verify.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: warden-go-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Format, vet, test, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-go@v7.0.0
+        with:
+          go-version-file: go.mod
+          cache: true
+      - name: Verify toolchain
+        run: go version
+      - name: Check gofmt
+        shell: bash
+        run: |
+          set -euo pipefail
+          unformatted="$(gofmt -l controller)"
+          if [[ -n "$unformatted" ]]; then
+            printf 'Files require gofmt:\n%s\n' "$unformatted" >&2
+            exit 1
+          fi
+      - name: Vet
+        run: go vet ./...
+      - name: Run tests without cached results
+        run: go test -count=1 ./controller/...
+      - name: Build controller
+        run: go build -o /tmp/warden-controller ./controller/cmd/warden
