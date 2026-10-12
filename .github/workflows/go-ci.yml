@@ -1,0 +1,48 @@
+name: Warden Go safety checks
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - 'controller/**'
+      - 'go.mod'
+      - 'go.sum'
+      - '.github/workflows/go-ci.yml'
+  push:
+    branches: [master]
+    paths:
+      - 'controller/**'
+      - 'go.mod'
+      - 'go.sum'
+      - '.github/workflows/go-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: warden-go-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Unit tests, vet and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Install module-defined Go toolchain
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7
+        with:
+          go-version-file: go.mod
+          cache: true
+          cache-dependency-path: go.sum
+      - name: Verify safety-boundary tests
+        run: go test -count=1 -v ./controller/internal/remediation ./controller/internal/gitops
+      - name: Test all Go packages
+        run: go test -count=1 ./...
+      - name: Static analysis
+        run: go vet ./...
+      - name: Compile controller
+        run: go build -o /tmp/warden ./controller/cmd/warden
