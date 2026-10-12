@@ -9,9 +9,9 @@
 
 **Closed-loop Kubernetes policy remediation with a hard-gated autonomy boundary.**
 
-[![Go](https://img.shields.io/badge/Go-1.22-00ADD8?logo=go)](go.mod)
+[![Go](https://img.shields.io/badge/Go-1.26.0-00ADD8?logo=go)](go.mod)
 [![Kyverno](https://img.shields.io/badge/Kyverno-v1.12-blue)](https://kyverno.io)
-[![Tests](https://img.shields.io/badge/tests-14%2F14%20passing-brightgreen)](controller)
+[![Warden Go safety checks](https://github.com/EdwinJdevops/warden/actions/workflows/go-ci.yml/badge.svg)](https://github.com/EdwinJdevops/warden/actions/workflows/go-ci.yml)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
 
 ## The problem with every policy engine you already run
@@ -77,6 +77,12 @@ flowchart TD
 | Hosted dashboard | Scoped, not started, see Roadmap |
 
 If a row says "not yet," it means exactly that. Nothing here is rounded up.
+
+## Executed automated verification
+
+[Warden Go safety checks](https://github.com/EdwinJdevops/warden/actions/workflows/go-ci.yml) run on controller changes and pull requests. The first completed post-merge run is [#38250292469](https://github.com/EdwinJdevops/warden/actions/runs/38250292469). The workflow executes the policy-tier and GitOps patch generator tests, the Go package test suite, `go vet`, and a controller build. Its Go version is read from `go.mod`.
+
+These automated checks substantiate **unit-level policy and patch behavior and compilation**. They do **not** demonstrate a live Kyverno PolicyReport watcher, real GitHub pull-request delivery, a production cluster, end-to-end auto-merge, or recovery from cluster/API failures. Those remain unverified integration boundaries.
 
 ## Install
 
